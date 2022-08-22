@@ -5,11 +5,6 @@ interface PokemonProviderProps{
     children: ReactNode
 }
 
-interface Type{
-    name: string
-}
-
-
 interface PokemonData{
     name: string;
     img: string;
