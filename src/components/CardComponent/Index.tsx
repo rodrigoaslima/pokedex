@@ -35,7 +35,7 @@ const CardComponent = ({name}: PokemonData) => {
   useEffect(()=>{
     getPokemon();
 // eslint-disable-next-line react-hooks/exhaustive-deps
-},[])
+},[pokemon])
 
  
   return(
