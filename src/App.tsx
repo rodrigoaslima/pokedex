@@ -1,5 +1,6 @@
 import { PokemonProvider } from './context/PokemonContext';
 import { PokemonDetalisProvider } from './context/PokemonDetailsContext';
+import { FavoritesProvider } from './context/FavoritesContext';
 
 import GlobalStyle from './styles/global';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -13,10 +14,12 @@ function App() {
     
       <PokemonProvider>
         <PokemonDetalisProvider>
-          <GlobalStyle/>
-          <Router >
-            <Routes />
-          </Router>
+          <FavoritesProvider>
+            <GlobalStyle/>
+            <Router >
+              <Routes />
+            </Router>
+          </FavoritesProvider>
         </PokemonDetalisProvider>
       </PokemonProvider>
   );

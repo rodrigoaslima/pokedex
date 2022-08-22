@@ -1,21 +1,30 @@
-import React from 'react';
-
-// import { Container } from './styles';
+import {FaArrowRight, FaArrowLeft} from 'react-icons/fa';
 
 const PaginationComponent = (props: any) => {
 
     const {handleNextPage, handlePreviousPage, totalPages} = props
   
   return(
-    <div>
+    <div style={{display: 'flex', margin: '10px'}}>
         <button onClick={handlePreviousPage}>
-            <div>{'<'}</div>
+            <FaArrowLeft
+              style={{background: 'none',
+              color:" #ffff",
+              border: "none",
+              marginRight: '10px'}}
+            />
         </button>
         
-        <div>Pages de {totalPages}</div>
+        <div>{totalPages} Pages</div>
 
-        <button onClick={handleNextPage}>
-            <div>{'>'}</div>
+        <button 
+          style={{background: 'none',
+          color:" #ffff",
+          border: "none",
+          marginLeft: '10px'}}
+          onClick={handleNextPage}
+        >
+            <FaArrowRight/>
         </button>
 
     </div>

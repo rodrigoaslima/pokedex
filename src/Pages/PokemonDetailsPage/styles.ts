@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import {AiOutlineStar, AiFillStar} from 'react-icons/ai'
 
 export const Container = styled.div`
     display: flex;
@@ -17,6 +18,24 @@ export const PokemonContainer = styled.div`
     border-style: solid;
     border-radius: 20px;
     border-color: #000;
+
+`;
+
+export const Header = styled.div`
+    display: flex;
+    align-items: center;
+`;
+
+export const NameText = styled.h1`
+    margin: 10px;
+`;
+
+export const FavoritesIcons = styled(AiFillStar)`
+    color: #fff000
+
+`;
+
+export const UnfavoriteIcons = styled(AiOutlineStar)`
 
 `;
 
