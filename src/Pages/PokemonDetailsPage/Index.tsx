@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import {AiOutlineStar, AiFillStar} from 'react-icons/ai'
+import React, { useCallback, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { useFavorite } from '../../context/FavoritesContext';
 import { usePokemonDetail } from '../../context/PokemonDetailsContext';
@@ -10,11 +9,7 @@ const PokemonDetailsPage: React.FC = () => {
 
     const {pokemon} = useParams<string>();
     const {getPokemonDetails,pokemonDetails} = usePokemonDetail();
-    const {getFavoritePokemon, favoriteList} = useFavorite()
-    console.log('pokemon: ', pokemon)
-    console.log('favoriteList: ', favoriteList)
-    console.log('favoriteList.findIndex(item => item.name === pokemon: ', favoriteList.findIndex(item => item.name === pokemon))
-
+    const {getFavoritePokemon, favoriteList} = useFavorite();
 
     useEffect(()=>{
         getPokemonDetails(pokemon);
@@ -26,17 +21,21 @@ const PokemonDetailsPage: React.FC = () => {
         favoriteList
     // eslint-disable-next-line react-hooks/exhaustive-deps
     },[favoriteList])
-    
+
+    const handleSubmit = useCallback((text: string)=> {
+        getFavoritePokemon(text)
+    }, [getFavoritePokemon])
+
   return(
     <Container>
         <Header>
             <NameText>{pokemonDetails.name}</NameText>
-            {favoriteList.findIndex(item => item.name === pokemon) ? 
-                <UnfavoriteIcons onClick={()=>getFavoritePokemon(pokemonDetails)} />
+            {favoriteList.includes(pokemon as string) ? 
+                <FavoritesIcons onClick={()=>handleSubmit(pokemonDetails.name)} />
 
                 :
+                <UnfavoriteIcons onClick={()=>handleSubmit(pokemonDetails.name)} />
                 
-                <FavoritesIcons onClick={()=>getFavoritePokemon(pokemonDetails)} />
             }
         </Header>
         
@@ -51,16 +50,16 @@ const PokemonDetailsPage: React.FC = () => {
                         {pokemonDetails.stats.map((e: any) => (
                             <>
                                 <Text>{e.stat.name}</Text>
-                                <StatsValor>{e.base_stat}</StatsValor>
+                                <StatsValor >{e.base_stat}</StatsValor>
                             </>  
                         ))}
                     </PokemonStatsContainer>
 
                     <img src={pokemonDetails.img} alt={pokemonDetails.name} />
                     <Footer>       
-                        {pokemonDetails.type.map((e:any)=> (
+                        {pokemonDetails.type.map((e:any, index)=> (
                             <>
-                                <Text>{e.type.name}</Text>
+                                <Text key={index}>{e.type.name}</Text>
                             </>
                         ))}
 

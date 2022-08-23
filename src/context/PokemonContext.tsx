@@ -32,7 +32,7 @@ function PokemonProvider({children}: PokemonProviderProps){
     async function getPokemonList(){
         try {
             const response = await Api.get(`pokemon`);
-            console.log('response: ', response)
+          
             setTotalPages(response.data.count)
             setNextPage(response.data.next);
             setPreviousPage(response.data.previous);

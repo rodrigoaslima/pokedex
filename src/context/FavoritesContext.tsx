@@ -4,46 +4,33 @@ interface FavoritesProviderProps{
     children: ReactNode
 }
 
-interface PokemonData{
-    name: string;
-    img: string;
-    type: [];
-    stats: [];
-    weight: number;
-    height: number;
-    order: number;
-    abilities: []
-}
-
 interface IFavoritesContextData{
-    pokemonDetails: PokemonData;
-    favoriteList: PokemonData[];
+    favoriteList: string[];
     // eslint-disable-next-line no-empty-pattern
-    getFavoritePokemon: ({}: PokemonData) => void;
+    getFavoritePokemon: (name:string) => void;
 
 }
 
 const FavoritesContext = createContext({} as IFavoritesContextData);
 
 function FavoritesProvider({children}: FavoritesProviderProps){
-    const [pokemonDetails, setPokemonDetails] = useState<PokemonData>({} as PokemonData);
-    const [favoriteList, setFavoriteList] = useState<PokemonData[]>([]); 
+    const [favoriteList, setFavoriteList] = useState<string[]>([]); 
 
-    function getFavoritePokemon(pokemon: PokemonData){
+    function getFavoritePokemon(name: string){
         
        const updateFavorites = [...favoriteList];
-       const favoriteIndex = favoriteList.findIndex(item => item.name === pokemon.name)
+       const favoriteIndex = favoriteList.indexOf(name);
        if(favoriteIndex >=0){
         updateFavorites.splice(favoriteIndex, 1);
        }else{
-        updateFavorites.push(pokemon)
+        updateFavorites.push(name);
        }
        setFavoriteList(updateFavorites) 
     }
 
    
     return(
-        <FavoritesContext.Provider value={{getFavoritePokemon, pokemonDetails, favoriteList}}>
+        <FavoritesContext.Provider value={{getFavoritePokemon, favoriteList}}>
             {children}
         </FavoritesContext.Provider>
     )
