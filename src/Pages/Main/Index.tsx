@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import CardComponent from '../../components/CardComponent/Index';
 import PaginationComponent from '../../components/PaginationComponent/Index';
 import { usePokemon } from '../../context/PokemonContext';
@@ -21,8 +22,11 @@ const Main: React.FC = () => {
   return(
     <Container>
 
-      <div>
+      <div style={{display:'flex', alignItems: 'center'}}>
         <h1>POKEDEX</h1>
+        <Link 
+          style={{color:'#fff', marginLeft: '10px'}}
+          to={'/favorites'}>Favorites</Link>
       </div>
 
       <PokemonContaner>
