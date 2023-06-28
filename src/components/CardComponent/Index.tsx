@@ -23,7 +23,6 @@ const CardComponent = ({name}: PokemonData) => {
     navigate(`/details/${pokemon.name}`);
   }
 
-
   async function getPokemon(){
     const response = await Api.get(`pokemon/${name}`);
     setPokemon({
@@ -40,7 +39,7 @@ const CardComponent = ({name}: PokemonData) => {
  
   return(
     <Container onClick={()=>{handleClick(pokemon)}}>
-      <img src={pokemon.img} alt={pokemon.img}/>
+      <img data-testid={pokemon.img} src={pokemon.img} alt={pokemon.img}/>
       <span>{name}</span>
     </Container>
   );
